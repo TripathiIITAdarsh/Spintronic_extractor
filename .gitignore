@@ -1,0 +1,13 @@
+.env
+.streamlit/secrets.toml
+__pycache__/
+outputs/
+parsed/
+demo_pdf/
+run_log.txt
+custom_features.json
+.venv/
+venv/
+_harness_app.py
+*.tmp
+*.log

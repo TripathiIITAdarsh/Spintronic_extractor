@@ -1,0 +1,24 @@
+# Render Blueprint: New → Blueprint → pick this repo. Secrets marked sync:false are asked for in the dashboard.
+services:
+  - type: web
+    name: spintronics-extractor
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
+    healthCheckPath: /_stcore/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.1
+      # free instance has 512 MB RAM -> keep upload batches modest
+      - key: STREAMLIT_SERVER_MAX_UPLOAD_SIZE
+        value: "150"
+      - key: GEMINI_MODELS
+        value: gemini-3.8-flash,gemini-3.7-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3-flash-preview,gemini-3.5-flash-lite,gemini-3.1-flash-lite,gemini-flash-lite-latest
+      # fallback when Gemini fails; model backends need a GPU server (see README)
+      - key: LOCAL_BACKEND
+        value: rules
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: APP_PASSWORD
+        sync: false

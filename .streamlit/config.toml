@@ -1,0 +1,6 @@
+[server]
+# MB per upload (PDFs / ZIPs are held in memory while processing)
+maxUploadSize = 500
+
+[theme]
+primaryColor = "#1F4E78"
